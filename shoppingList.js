@@ -300,7 +300,8 @@ addItemBtn.addEventListener("click", function(){
   }
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""&& !itemAlreadyInArray){
     //addItemToShoppingListAudio.play()
-    previousItemsInShoppingList.push(shoppingListItemInput.value)
+    try{previousItemsInShoppingList.push(shoppingListItemInput.value);}
+    catch(error){previousItemsInShoppingList = [shoppingListItemInput.value];}
     localStorage.setItem("previousItemsSearched",JSON.stringify(previousItemsInShoppingList))
     clearAllForShoppingListButton.style.display = "block"
      addItemBtn.style.backgroundColor = "gray"
