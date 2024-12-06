@@ -120,7 +120,12 @@ function onLoadShopExsistingItems() {
   catch{
   }
 }
+try{
 onLoadShopExsistingItems()
+}
+catch{
+
+}
 console.log(JSON.parse(localStorage.getItem("shoppingListItems")))
 /*
 shoppingListPriceInput.addEventListener("click", function(){
