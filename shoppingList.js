@@ -32,7 +32,7 @@ const clearPastSearchesBtn = document.getElementById("clearPastSearchesBtn")
 //gainNode.connect(audioCtx.destination);
 let previousItemsInShoppingList = []
 try{previousItemsInShoppingList = JSON.parse(localStorage.getItem("previousItemsSearched"))}
-catch(error){previousItemsInShoppingList =["Example"]}//all items they have put in their shopping list (for the past 6 shopping lists)
+catch{previousItemsInShoppingList =["Example"]}//all items they have put in their shopping list (for the past 6 shopping lists)
 let prevoiusItemsInShoppingListFilterd = []// = ["Just", "Some just checking", "example spaces", " items","Even ","More","examples","to","show","the","limit","of","this","thingy"];//just don't show items already in this shopping list use .filter filter[i] !== list[x]
 let listOfShoppingListItems = typeof JSON.parse(localStorage.getItem("shoppingListItems")) === 'object'? JSON.parse(localStorage.getItem("shoppingListItems")):["This is an example", 99, Home];
 
