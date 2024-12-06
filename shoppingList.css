@@ -1,0 +1,347 @@
+body{
+  display: flex;
+  min-height: 100%;
+  margin: 0px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/pictures/backgroundForShoppingList.png");
+  background-size: cover;
+  background-color: rgb(0 103 41);
+}
+p{
+  font-weight: bold;
+}
+button{
+  font-weight: bold;
+  border: none;
+}
+h1{
+  font-family: 'roboto', sans-serif;
+  font-weight: bolder;
+  font-size: 2000;
+}
+/*none;
+  opacity: 0%;*/
+.clearPastSearchesWaringEl{
+  position: fixed;
+  z-index: 4;
+  font-family: 'roboto', sans-serif;
+  font-weight: bold;
+  font-size: large;
+  display: none;
+  opacity: 0%;
+  top: 0%;
+  left: 0%;
+  margin: 0px;
+  padding: 6px 0px;
+  transition: all 300ms;
+  color: rgb(0, 0, 0);
+  border-radius: 6px;
+  background-color: rgb(232, 192, 140);
+}
+.clearPastSearchesBtn{
+  background-color: rgb(255, 101, 101);
+  position: fixed;
+  display: none;
+  opacity: 0%;
+  z-index: 4;
+  font-family: 'roboto', sans-serif;
+  font-weight: bold;
+  font-size: large;
+  top: 0%;
+  left: 0%;
+  margin: 0px;
+  padding: 6px 3px;
+  transition: all 300ms;
+}
+.clearPastSearchesBtn:hover{
+  color: white;
+  background-color: #2d2d2d;
+}
+.clearPastSearchesBtn:active{
+  background-color: #000000;
+}
+.pastItemsForShoppingCartCn{
+  background-color: white;
+  max-height: 200px;
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  overflow-y: scroll;
+  display: none;
+  opacity: 0%;
+  z-index: 4;
+}
+.previousSearchItemEl{
+  font-family: 'roboto', sans-serif;
+  font-weight: bold;
+  font-size: large;
+  margin: 0px;
+  padding: 6px 3px;
+}
+.previousSearchItemEl:hover{
+  background-color: #434343;
+  color: white;
+}
+.clearAllForShoppingListButton{
+  display: none;
+  background-color: red;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-family: 'roboto', sans-serif;
+  transition: background-color 300ms, color 300ms;
+}
+.clearAllForShoppingListButton:hover{
+  background-color: rgb(74, 74, 74);
+  color: white;
+}
+.clearAllForShoppingListButton:active{
+  background-color: rgb(63, 63, 63);
+  color: white;
+}
+h3{
+  margin-top: 0px;
+  font-family: 'roboto', sans-serif;
+  font-weight: bolder;
+  font-size: 800;
+}
+button{
+  cursor: pointer;
+}
+.shoppingListItemHolder{
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  width: 80%;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 200px;
+}
+.shoppingListItem{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  padding: 0px 6px;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+  width: 100%;
+  min-width: 300px;
+  transition: background-color 300ms, padding 300ms;
+  animation: itemDisapear .6s ease-in-out forwards;
+  animation-iteration-count: 1;
+  animation-delay: .5s;
+  animation-play-state:paused;
+  z-index: 2;
+}
+.shoppingListItem:hover{
+  padding: 12px 6px;
+  background-color: rgb(80, 80, 80);
+}
+.shoppingListItem:active{
+  padding: 15px 6px;
+  background-color: rgb(58, 58, 58);
+  transition: all 0s;
+}
+.priceForShoppingListItem{
+  width: 25%;
+}
+.categoriesForShoppingList{
+  width: 25%;
+}
+.shoppingListItem p{
+  display: inline;
+  font-family: 'roboto',sans-serif;
+  font-size: larger;
+}
+.shoppingListItem button{
+  border: none;
+  background-color: rgba(228, 228, 228, 0);
+}
+.shoppingListItem button:hover{
+  font-size: large;
+}
+.shoppingListItem button:active{
+  
+  font-size: large;
+} 
+.nameForShoppingListItem{
+  width: 50%;
+}
+@keyframes itemDisapear{
+  0%{
+    opacity: 100%;
+    width: 100%;
+  }
+  20%{
+    opacity: 100%;
+    width: 120%;
+  }
+  100%{
+    opacity: 0%;
+    width: 0%;
+    display: none;
+  }
+}
+.gettingRidOfItem{
+  transition: background-color 300ms, padding 300ms;
+  animation: itemDisapear .6s ease-in-out forwards;
+  animation-iteration-count: 1;
+}
+.shoppingListInputs{
+  position: fixed;
+  bottom: 10%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 80%;
+  column-gap: .6%;
+  background-color: rgb(177, 129, 67);
+  border-radius: 6px;
+  padding: 12px;
+  z-index: 3;
+}
+input{
+  height: 36px;
+  margin: 0px;
+  border: none;
+  background-color: rgb(255, 249, 240);
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 300ms;
+}
+select{
+  height: 40px;
+  border: none;
+  background-color: aliceblue;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 300ms;
+  color: rgb(109, 109, 109);
+}
+select:hover{
+  background-color: rgb(80, 80, 80);
+  color: white;
+}
+select:focus{
+  background-color: rgb(63, 63, 63);
+  color: white;
+}
+.shoppingListItemInput{
+  width: 50%;
+}
+input:hover{
+  background-color: rgb(80, 80, 80);
+  color: white;
+}
+input:focus{
+  background-color: rgb(63, 63, 63);
+  color: white;
+}
+::placeholder{
+  color: rgb(109, 109, 109);
+}
+.shoppingListPriceInput{
+  width: 25%;
+}
+.categoriesForShoppingListInput{
+  width: 20%;
+}
+.closeButtonForShoppingListItemBtn{
+  border: none;
+  background-color: rgba(228, 228, 228, 0);
+}
+.addItemBtn{
+  background-color: gray;
+  color: white;
+  border-radius: 6px;
+  height: 42px;
+  font-weight: bold;
+  font-family: 'roboto', sans-serif;
+  transition: background-color 300ms, color 300ms;
+}
+.addItemBtn:hover{
+  background-color: rgb(74, 74, 74);
+  color: white;
+}
+.addItemBtn:focus{
+  background-color: rgb(63, 63, 63);
+  color: white;
+}
+.displayNone{
+  display: none;
+}
+.mustInputAnItemEl,
+.doubleItemEl{
+  position: fixed;
+  left: 50%;
+  bottom: 4%;
+  transform: translate(-50%,0%);
+  font-family: 'roboto', sans-serif;
+  font-size: large;
+  font-weight: bold;
+  display: none;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: rgb(232, 192, 140);
+  z-index: 3;
+}
+.mustInputAnItemEl span,
+.doubleItemEl span{
+  color: rgb(238, 38, 38);
+}
+.coveringUp{
+  position: fixed;
+  top: 80%;
+  left: 0%;
+  width: 100%;
+  height: 20%;
+  z-index: 1;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,20));
+}
+.clearListWarningEl{
+  display: none;
+  font-family: 'roboto', sans-serif;
+  font-weight: bold;
+  font-size: large;
+  margin-top: 0px;
+  margin-bottom: 6px;
+}
+.gettingRidOfItemHover{
+  padding: 12px 6px;
+  background-color: rgb(80, 80, 80);
+  color: white;
+}
+.backHome{
+  position: fixed;
+  bottom: 6px;
+  left: 6px;
+  transform: translate(0%,-100%);
+  transition: 0.3s;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  text-decoration: none;
+  margin-top: 12px;
+  background-color: #d01e1e;
+  color: white;
+  font-size: 16px;
+  padding: 1px 6px;
+  border: 0px;
+  cursor: pointer;
+  border-radius: 10px;
+  max-width: 200px;
+  z-index: 30;
+  }
+  .backHome:hover{
+    
+    background-color: #2d2d2d;
+  }
+  .backHome:active{
+    background-color: black;
+  }
