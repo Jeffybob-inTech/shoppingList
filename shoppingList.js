@@ -18,8 +18,8 @@ const pastItemsForShoppingCartCn = document.getElementById("pastItemsForShopping
 const clearPastSearchesWaringEl = document.getElementById("clearPastSearchesWaringEl")
 //const dataSearchThroughShoppingListInput = document.getElementById("[data-search-for-shopping-list-input")
 const clearPastSearchesBtn = document.getElementById("clearPastSearchesBtn")
-const addItemToShoppingListAudio = new Audio("/personalFinanceWebsite/audioFiles/addExpenseNewSoundEffect.wav")
-const whoosh = new Audio("/personalFinanceWebsite/audioFiles/whoosh.wav")
+//const addItemToShoppingListAudio = new Audio("/personalFinanceWebsite/audioFiles/addExpenseNewSoundEffect.wav")
+const whoosh = new Audio("whoosh.wav")
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 var source = audioCtx.createMediaElementSource(whoosh);
 
@@ -287,7 +287,7 @@ addItemBtn.addEventListener("click", function(){
     shoppingListItemInput.value === listOfShoppingListItems[i] ? itemAlreadyInArray = true: itemAlreadyInArray;
   }
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""&& !itemAlreadyInArray){
-    addItemToShoppingListAudio.play()
+    //addItemToShoppingListAudio.play()
     previousItemsInShoppingList.push(shoppingListItemInput.value)
     localStorage.setItem("previousItemsSearched",JSON.stringify(previousItemsInShoppingList))
     clearAllForShoppingListButton.style.display = "block"
@@ -376,7 +376,7 @@ addItemBtn.addEventListener("dblclick", function(){
     //showing previous search thingy
     previousItemsInShoppingList.push(shoppingListItemInput.value)
     localStorage.setItem("previousItemsSearched",JSON.stringify(previousItemsInShoppingList))
-    addItemToShoppingListAudio.play()
+    //addItemToShoppingListAudio.play()
     addItemBtn.style.backgroundColor = "gray"
     clearAllForShoppingListButton.style.display = "block"
     //adding and representing new total
