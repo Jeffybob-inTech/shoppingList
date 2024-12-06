@@ -309,7 +309,8 @@ addItemBtn.addEventListener("click", function(){
      totalAmountBeingSpentOnThisShoppingList += Number(shoppingListPriceInput.value)
      totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
     //getting the values and setting them to the array
-    listOfShoppingListItems.push(shoppingListItemInput.value)
+    try{listOfShoppingListItems.push(shoppingListItemInput.value);}
+    catch{listOfShoppingListItems = [shoppingListItemInput.value];}
     listOfShoppingListItems.push(shoppingListPriceInput.value)
     listOfShoppingListItems.push(categoriesForShoppingListInput.value)
     localStorage.setItem("shoppingListItems", JSON.stringify(listOfShoppingListItems))
