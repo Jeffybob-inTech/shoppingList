@@ -117,13 +117,13 @@ function onLoadShopExsistingItems() {
   }
   totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
      }
-  catch{
+  catch(error){
   }
 }
 try{
 onLoadShopExsistingItems()
 }
-catch{
+catch(error){
 
 }
 console.log(JSON.parse(localStorage.getItem("shoppingListItems")))
@@ -296,7 +296,7 @@ addItemBtn.addEventListener("click", function(){
     shoppingListItemInput.value === listOfShoppingListItems[i] ? itemAlreadyInArray = true: itemAlreadyInArray;
   }
   }
-  catch{
+  catch(error){
   }
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""&& !itemAlreadyInArray){
     //addItemToShoppingListAudio.play()
