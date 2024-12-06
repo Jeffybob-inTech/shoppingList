@@ -19,17 +19,17 @@ const clearPastSearchesWaringEl = document.getElementById("clearPastSearchesWari
 //const dataSearchThroughShoppingListInput = document.getElementById("[data-search-for-shopping-list-input")
 const clearPastSearchesBtn = document.getElementById("clearPastSearchesBtn")
 //const addItemToShoppingListAudio = new Audio("/personalFinanceWebsite/audioFiles/addExpenseNewSoundEffect.wav")
-const whoosh = new Audio("whoosh.wav")
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-var source = audioCtx.createMediaElementSource(whoosh);
+//const whoosh = new Audio("whoosh.wav")
+//var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+//var source = audioCtx.createMediaElementSource(whoosh);
 
 // create a gain node
-var gainNode = audioCtx.createGain();
-gainNode.gain.value = 2; // double the volume
-source.connect(gainNode);
+//var gainNode = audioCtx.createGain();
+//gainNode.gain.value = 2; // double the volume
+//source.connect(gainNode);
 
 // connect the gain node to an output destination
-gainNode.connect(audioCtx.destination);
+//gainNode.connect(audioCtx.destination);
 let previousItemsInShoppingList = []
 try{previousItemsInShoppingList = JSON.parse(localStorage.getItem("previousItemsSearched"))}
 catch(error){previousItemsInShoppingList =[]}//all items they have put in their shopping list (for the past 6 shopping lists)
@@ -717,7 +717,7 @@ shoppingListItemHolder.addEventListener('click', function(event) {
   console.log(shoppingListItemHolder.children)
   //event.target.classList.toggle("gettingRidOfItem")
   if (event.target.tagName.toLowerCase() === 'div') {
-    whoosh.play()
+    //whoosh.play()
     doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
     clearListWarningEl.style.display = "none"
@@ -735,7 +735,7 @@ shoppingListItemHolder.addEventListener('click', function(event) {
      totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
   }
   else if(event.target.tagName.toLowerCase() === 'p'){
-    whoosh.play()
+    //whoosh.play()
     doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
     clearListWarningEl.style.display = "none"
