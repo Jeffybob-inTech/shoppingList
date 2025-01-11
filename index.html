@@ -10,12 +10,16 @@
 <body>
   <div class="pastItemsForShoppingCartCn" id="pastItemsForShoppingCartCn"> </div>
   <div class="coveringUp"></div>
+  
   <a class="backHome" href="/userHomePage/userHomePage.html">Back Home</a>
   <h1 class="shoppingListHeader">Shopping List</h1>
   <!--require a dblclick-->
   <h3 class="totalAmountBeingSpentThisMonthEl">Total amount being spent: $<span id="totalAmountBeingSpentThisMonthEl"></span></h3>
+  <div class="buttonActionsHolderForShoppingListCn">
   <button class="clearAllForShoppingListButton" id="clearAllForShoppingListButton">Clear Shopping List</button>
-  <p class="clearListWarningEl" id="clearListWarningEl">Are you sure you want to clear your shopping list? double click to confirm</p>
+  <button id="recoverPastItemForShoppingListBtn" class="recoverPastItemForShoppingListBtn">Recover Past Item</button>
+  </div>
+  <p class="clearListWarningEl" id="clearListWarningEl">Are you sure you want to clear your shopping list, all previous items will be lost. double click to confirm</p>
   <main class="shoppingListItemHolder" id="shoppingListItemHolder">
     <!--<main class="shoppingListItem" id="shoppingListItemNew"></main>
       <p id="nameForShoppingListItemEl" class="nameForShoppingListItem">Example Item thats really long to prove this works</p>
@@ -29,6 +33,7 @@
       <p class="categoriesForShoppingList" id="categoriesForShoppingListEl">Example Category</p>
       <button class="closeButtonForShoppingListItemBtn" id="closeButtonForShoppingListItemBtn">X</button>
     </div>-->
+    
   </main>
   <!--hold items in an array and create the element dynamically in js, get items from the inputs-->
   <div class="shoppingListInputs">
@@ -49,7 +54,7 @@
   </div>
   <button class="clearPastSearchesBtn" id="clearPastSearchesBtn">Clear Past Searches</button>
   <p id="clearPastSearchesWaringEl" class="clearPastSearchesWaringEl">Please double click to confirm</p>
-  <p class="mustInputAnItemEl" id="mustInputAnItemEl">Your must have a <span id="youMustHaveThisSpecificItemEl" class="youMustHaveThisSpecificItemEl"></span> input</p>
+  <p class="mustInputAnItemEl" id="mustInputAnItemEl">You must have <span id="aVsAnForShoppingListInputsEl">a</span> <span id="youMustHaveThisSpecificItemEl" class="youMustHaveThisSpecificItemEl"></span> input</p>
   <p class="doubleItemEl" id="doubleItemEl">You already have <span class="doubplicateItemEl" id="doubplicateItemEl">Sample Item</span> in your list, double click to confirm your addition</p>
   <script src="shoppingList.js" defer></script>
   <img src="/personalFinanceWebsite/audioFiles/addExpenseNewSoundEffect.mp3" alt="">
