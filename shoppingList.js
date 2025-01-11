@@ -16,25 +16,28 @@ const clearAllForShoppingListButton = document.getElementById("clearAllForShoppi
 const clearListWarningEl = document.getElementById("clearListWarningEl")
 const pastItemsForShoppingCartCn = document.getElementById("pastItemsForShoppingCartCn")
 const clearPastSearchesWaringEl = document.getElementById("clearPastSearchesWaringEl")
+const recoverPastItemForShoppingListBtn = document.getElementById("recoverPastItemForShoppingListBtn")
 //const dataSearchThroughShoppingListInput = document.getElementById("[data-search-for-shopping-list-input")
 const clearPastSearchesBtn = document.getElementById("clearPastSearchesBtn")
-//const addItemToShoppingListAudio = new Audio("/personalFinanceWebsite/audioFiles/addExpenseNewSoundEffect.wav")
-//const whoosh = new Audio("whoosh.wav")
-//var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-//var source = audioCtx.createMediaElementSource(whoosh);
+const aVsAnForShoppingListInputsEl = document.getElementById("aVsAnForShoppingListInputsEl")
+const addItemToShoppingListAudio = new Audio("/personalFinanceWebsite/audioFiles/addExpenseNewSoundEffect.wav")
+const whoosh = new Audio("/personalFinanceWebsite/audioFiles/whoosh.wav")
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+var source = audioCtx.createMediaElementSource(whoosh);
 
 // create a gain node
-//var gainNode = audioCtx.createGain();
-//gainNode.gain.value = 2; // double the volume
-//source.connect(gainNode);
+var gainNode = audioCtx.createGain();
+gainNode.gain.value = 2; // double the volume
+source.connect(gainNode);
 
 // connect the gain node to an output destination
-//gainNode.connect(audioCtx.destination);
+gainNode.connect(audioCtx.destination);
+let redoItemsTakenOutOfShoppingList = []
 let previousItemsInShoppingList = []
 try{previousItemsInShoppingList = JSON.parse(localStorage.getItem("previousItemsSearched"))}
-catch{previousItemsInShoppingList =["Example"]}//all items they have put in their shopping list (for the past 6 shopping lists)
+catch(error){previousItemsInShoppingList =[]}//all items they have put in their shopping list (for the past 6 shopping lists)
 let prevoiusItemsInShoppingListFilterd = []// = ["Just", "Some just checking", "example spaces", " items","Even ","More","examples","to","show","the","limit","of","this","thingy"];//just don't show items already in this shopping list use .filter filter[i] !== list[x]
-let listOfShoppingListItems = typeof JSON.parse(localStorage.getItem("shoppingListItems")) === 'object'? JSON.parse(localStorage.getItem("shoppingListItems")):["This is an example", 99, Home];
+let listOfShoppingListItems = typeof JSON.parse(localStorage.getItem("shoppingListItems")) === 'object'? JSON.parse(localStorage.getItem("shoppingListItems")):[];
 
 if(previousItemsInShoppingList != null){
 for(let i = 0; i<previousItemsInShoppingList.length; i++){
@@ -67,7 +70,7 @@ console.log(prevoiusItemsInShoppingListFilterd)
 console.log(prevoiusItemsInShoppingListFilterd)
 let totalAmountBeingSpentOnThisShoppingList = 0;
 function onLoadShopExsistingItems() {
-  try{for(let i = 0; i<listOfShoppingListItems.length; i +=3){
+  for(let i = 0; i<listOfShoppingListItems.length; i +=3){
     var newListItem = document.createElement("div");
     newListItem.classList.add("shoppingListItem");
     shoppingListItemHolder.appendChild(newListItem);
@@ -90,16 +93,16 @@ function onLoadShopExsistingItems() {
       newListItem.style.backgroundColor = "#5B3528"
     }
     else if(listOfShoppingListItems[(i+2)] == "Food"){
-      newListItem.style.backgroundColor = "blue"
+      newListItem.style.backgroundColor = "#499EF3"
     }
     else if(listOfShoppingListItems[(i+2)] == "Insurance"){
-      newListItem.style.backgroundColor = "purple"
+      newListItem.style.backgroundColor = "#DE29F6"
     }
     else if(listOfShoppingListItems[(i+2)] == "Health"){
       newListItem.style.backgroundColor = "red"
     }
     else if(listOfShoppingListItems[(i+2)] == "Savings"){
-      newListItem.style.backgroundColor = "green"
+      newListItem.style.backgroundColor = "#157F19"
     }
     else if(listOfShoppingListItems[(i+2)] == "Transportation"){
       newListItem.style.backgroundColor = "gray"
@@ -116,16 +119,8 @@ function onLoadShopExsistingItems() {
     clearAllForShoppingListButton.style.display = "block"
   }
   totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
-     }
-  catch(error){
-  }
 }
-try{
 onLoadShopExsistingItems()
-}
-catch(error){
-
-}
 console.log(JSON.parse(localStorage.getItem("shoppingListItems")))
 /*
 shoppingListPriceInput.addEventListener("click", function(){
@@ -139,6 +134,8 @@ clearAllForShoppingListButton.addEventListener("click", function(){
 })
 clearAllForShoppingListButton.addEventListener("dblclick", function(){
   //whoosh.play()
+  redoItemsTakenOutOfShoppingList = []
+  recoverPastItemForShoppingListBtn.style.display = "none"
   clearListWarningEl.style.display = "none"
   doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
@@ -156,13 +153,14 @@ categoriesForShoppingListInput.addEventListener("mouseleave",function(){
 
   categoriesForShoppingListInput.style.color= "black"
 })
-categoriesForShoppingListInput.addEventListener("e",function(){
+categoriesForShoppingListInput.addEventListener("mouseeneter",function(){
 
   categoriesForShoppingListInput.style.color= "white"
 })
-shoppingListPriceInput.addEventListener("change", function(){
+shoppingListPriceInput.addEventListener("input", function(){
+  shoppingListPriceInput.value.length > 20 ? shoppingListPriceInput.value = shoppingListPriceInput.value.substring(0,20):shoppingListPriceInput.value = shoppingListPriceInput.value;
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""){
-    addItemBtn.style.backgroundColor = "green"
+    addItemBtn.style.backgroundColor = "#157F19"
   }
   doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
@@ -173,7 +171,7 @@ console.log(newShoppingListPastSearches)
 let previousValue = "";
 shoppingListItemInput.addEventListener("input", function(e){
   //filtering through past searches
-  
+  shoppingListItemInput.value.length > 100 ? shoppingListItemInput.value = shoppingListItemInput.value.substring(0,100):shoppingListItemInput.value = shoppingListItemInput.value;
   const value = e.target.value
   console.log(value)
   //newShoppingListPastSearches = []
@@ -282,7 +280,7 @@ shoppingListItemInput.addEventListener("input", function(e){
 
 
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""){
-    addItemBtn.style.backgroundColor = "green"
+    addItemBtn.style.backgroundColor = "#157F19"
   }
   doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
@@ -291,17 +289,12 @@ shoppingListItemInput.addEventListener("input", function(e){
 //make a double click to confirm doplicates
 addItemBtn.addEventListener("click", function(){
   let itemAlreadyInArray = false;
-  try{
   for(let i = 0; i<listOfShoppingListItems.length; i +=3){
     shoppingListItemInput.value === listOfShoppingListItems[i] ? itemAlreadyInArray = true: itemAlreadyInArray;
   }
-  }
-  catch(error){
-  }
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""&& !itemAlreadyInArray){
-    //addItemToShoppingListAudio.play()
-    try{previousItemsInShoppingList.push(shoppingListItemInput.value);}
-    catch(error){previousItemsInShoppingList = [shoppingListItemInput.value];}
+    addItemToShoppingListAudio.play()
+    previousItemsInShoppingList.push(shoppingListItemInput.value)
     localStorage.setItem("previousItemsSearched",JSON.stringify(previousItemsInShoppingList))
     clearAllForShoppingListButton.style.display = "block"
      addItemBtn.style.backgroundColor = "gray"
@@ -309,8 +302,7 @@ addItemBtn.addEventListener("click", function(){
      totalAmountBeingSpentOnThisShoppingList += Number(shoppingListPriceInput.value)
      totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
     //getting the values and setting them to the array
-    try{listOfShoppingListItems.push(shoppingListItemInput.value);}
-    catch{listOfShoppingListItems = [shoppingListItemInput.value];}
+    listOfShoppingListItems.push(shoppingListItemInput.value)
     listOfShoppingListItems.push(shoppingListPriceInput.value)
     listOfShoppingListItems.push(categoriesForShoppingListInput.value)
     localStorage.setItem("shoppingListItems", JSON.stringify(listOfShoppingListItems))
@@ -342,16 +334,16 @@ addItemBtn.addEventListener("click", function(){
       newListItem.style.backgroundColor = "#5B3528"
     }
     else if(categoriesForShoppingListInput.value == "Food"){
-      newListItem.style.backgroundColor = "blue"
+      newListItem.style.backgroundColor = "#499EF3"
     }
     else if(categoriesForShoppingListInput.value == "Insurance"){
-      newListItem.style.backgroundColor = "purple"
+      newListItem.style.backgroundColor = "#DE29F6"
     }
     else if(categoriesForShoppingListInput.value == "Health"){
       newListItem.style.backgroundColor = "red"
     }
     else if(categoriesForShoppingListInput.value == "Savings"){
-      newListItem.style.backgroundColor = "green"
+      newListItem.style.backgroundColor = "#157F19"
     }
     else if(categoriesForShoppingListInput.value == "Transportation"){
       newListItem.style.backgroundColor = "gray"
@@ -372,10 +364,12 @@ addItemBtn.addEventListener("click", function(){
   }
   else if(shoppingListItemInput.value == ""){
     youMustHaveThisSpecificItemEl.textContent = "item"
+    aVsAnForShoppingListInputsEl.textContent = "an"
     mustInputAnItemEl.style.display = "block"
   }
   else if(shoppingListPriceInput.value == ""){
     youMustHaveThisSpecificItemEl.textContent = "price"
+    aVsAnForShoppingListInputsEl.textContent = "a"
     mustInputAnItemEl.style.display = "block"
   }
   else if(itemAlreadyInArray){
@@ -390,14 +384,20 @@ addItemBtn.addEventListener("dblclick", function(){
     //showing previous search thingy
     previousItemsInShoppingList.push(shoppingListItemInput.value)
     localStorage.setItem("previousItemsSearched",JSON.stringify(previousItemsInShoppingList))
-    //addItemToShoppingListAudio.play()
+    addItemToShoppingListAudio.play()
     addItemBtn.style.backgroundColor = "gray"
     clearAllForShoppingListButton.style.display = "block"
     //adding and representing new total
     totalAmountBeingSpentOnThisShoppingList += Number(shoppingListPriceInput.value)
     totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
    //getting the values and setting them to the array
-   listOfShoppingListItems.push(shoppingListItemInput.value)
+   numberOfTimesItemIsPrevoiuslyInArrayForShoppingList = 0;
+   for(let i = 0; i<listOfShoppingListItems.length; i+=3){
+    shoppingListItemInput.value === listOfShoppingListItems[i] ? numberOfTimesItemIsPrevoiuslyInArrayForShoppingList++
+      :shoppingListItemInput.value === (listOfShoppingListItems[i]).substring(0,listOfShoppingListItems[i].length-3)&& listOfShoppingListItems[i].substring(listOfShoppingListItems[i].length-3,listOfShoppingListItems[i].length-2) === "(" ||listOfShoppingListItems[i].substring(listOfShoppingListItems[i].length-4,listOfShoppingListItems[i].length-3) === "("&& listOfShoppingListItems[i].substring(listOfShoppingListItems[i].length-1) === ")" ?numberOfTimesItemIsPrevoiuslyInArrayForShoppingList++
+        :numberOfTimesItemIsPrevoiuslyInArrayForShoppingList;
+   }
+   numberOfTimesItemIsPrevoiuslyInArrayForShoppingList > 0? listOfShoppingListItems.push(shoppingListItemInput.value + "(" + numberOfTimesItemIsPrevoiuslyInArrayForShoppingList + ")"): listOfShoppingListItems.push(shoppingListItemInput.value);
    listOfShoppingListItems.push(shoppingListPriceInput.value)
    listOfShoppingListItems.push(categoriesForShoppingListInput.value)
    localStorage.setItem("shoppingListItems", JSON.stringify(listOfShoppingListItems))
@@ -410,7 +410,7 @@ addItemBtn.addEventListener("dblclick", function(){
    var newListItemName = document.createElement("p");
    newListItemName.classList.add("nameForShoppingListItem");
    newListItem.appendChild(newListItemName)
-   newListItemName.textContent = shoppingListItemInput.value;
+   numberOfTimesItemIsPrevoiuslyInArrayForShoppingList > 0? newListItemName.textContent = shoppingListItemInput.value + "(" + numberOfTimesItemIsPrevoiuslyInArrayForShoppingList + ")": newListItemName.textContent = shoppingListItemInput.value;
    newListItem.setAttribute("id", "shoppingListItemNameNew")
    var newListItemPrice = document.createElement("p");
    newListItemPrice.classList.add("priceForShoppingListItem");
@@ -429,16 +429,16 @@ addItemBtn.addEventListener("dblclick", function(){
     newListItem.style.backgroundColor = "#5B3528"
   }
   else if(categoriesForShoppingListInput.value == "Food"){
-    newListItem.style.backgroundColor = "blue"
+    newListItem.style.backgroundColor = "#499EF3"
   }
   else if(categoriesForShoppingListInput.value == "Insurance"){
-    newListItem.style.backgroundColor = "purple"
+    newListItem.style.backgroundColor = "#DE29F6"
   }
   else if(categoriesForShoppingListInput.value == "Health"){
     newListItem.style.backgroundColor = "red"
   }
   else if(categoriesForShoppingListInput.value == "Savings"){
-    newListItem.style.backgroundColor = "green"
+    newListItem.style.backgroundColor = "#157F19"
   }
   else if(categoriesForShoppingListInput.value == "Transportation"){
     newListItem.style.backgroundColor = "gray"
@@ -459,10 +459,12 @@ addItemBtn.addEventListener("dblclick", function(){
   }
   else if(shoppingListItemInput.value == ""){
     youMustHaveThisSpecificItemEl.textContent = "item"
+    aVsAnForShoppingListInputsEl.textContent = "an"
     mustInputAnItemEl.style.display = "block"
   }
   else if(shoppingListPriceInput.value == ""){
     youMustHaveThisSpecificItemEl.textContent = "price"
+    aVsAnForShoppingListInputsEl.textContent = "a"
     mustInputAnItemEl.style.display = "block"
   }
 })
@@ -727,17 +729,86 @@ shoppingListItemInput.addEventListener("focusout",function(){
   },300)
 })
 //document.getElementById("shoppingListItemNew").style.backgroundColor = "black"
+//make an array of prevously held items so they can get old items back, doesn't ahve to be held in localstroage
+recoverPastItemForShoppingListBtn.addEventListener("click", function(){
+    let i = redoItemsTakenOutOfShoppingList.length;
+    var newListItem = document.createElement("div");
+    newListItem.classList.add("shoppingListItem");
+    shoppingListItemHolder.appendChild(newListItem);
+    newListItem.setAttribute("id", "shoppingListItemNew")//also make this have an index like the thing below
+    var newListItemName = document.createElement("p");
+    newListItemName.classList.add("nameForShoppingListItem");
+    newListItem.appendChild(newListItemName)
+    newListItemName.textContent = redoItemsTakenOutOfShoppingList[(i-3)];
+    newListItem.setAttribute("id", "shoppingListItemNameNew")
+    var newListItemPrice = document.createElement("p");
+    newListItemPrice.classList.add("priceForShoppingListItem");
+    newListItem.appendChild(newListItemPrice)
+    newListItemPrice.textContent = "$"+redoItemsTakenOutOfShoppingList[(i-2)];
+    var newListItemCategories = document.createElement("p");
+    newListItemCategories.classList.add("categoriesForShoppingList");
+    newListItem.appendChild(newListItemCategories)
+    newListItemCategories.textContent = redoItemsTakenOutOfShoppingList[(i-1)]
+    totalAmountBeingSpentOnThisShoppingList += Number(redoItemsTakenOutOfShoppingList[i-2])
+    if(redoItemsTakenOutOfShoppingList[(i-1)] == "Home"){
+      newListItem.style.backgroundColor = "#5B3528"
+    }
+    else if(redoItemsTakenOutOfShoppingList[(i-1)] == "Food"){
+      newListItem.style.backgroundColor = "#499EF3"
+    }
+    else if(redoItemsTakenOutOfShoppingList[(i-1)] == "Insurance"){
+      newListItem.style.backgroundColor = "#DE29F6"
+    }
+    else if(redoItemsTakenOutOfShoppingList[(i-1)] == "Health"){
+      newListItem.style.backgroundColor = "red"
+    }
+    else if(redoItemsTakenOutOfShoppingList[(i-1)] == "Savings"){
+      newListItem.style.backgroundColor = "#157F19"
+    }
+    else if(redoItemsTakenOutOfShoppingList[(i-1)] == "Transportation"){
+      newListItem.style.backgroundColor = "gray"
+    }
+    else if(redoItemsTakenOutOfShoppingList[(i-1)] == "Utilities"){
+      newListItem.style.backgroundColor = "yellow"
+    }
+    else if(redoItemsTakenOutOfShoppingList[(i-1)] == "Wants"){
+      newListItem.style.backgroundColor = "orange"
+    }
+    else{
+      newListItem.style.backgroundColor = "white"
+    }
+    clearAllForShoppingListButton.style.display = "block"
+    listOfShoppingListItems.push(redoItemsTakenOutOfShoppingList[redoItemsTakenOutOfShoppingList.length-3])
+    listOfShoppingListItems.push(redoItemsTakenOutOfShoppingList[redoItemsTakenOutOfShoppingList.length-2])
+    listOfShoppingListItems.push(redoItemsTakenOutOfShoppingList[redoItemsTakenOutOfShoppingList.length-1])
+  localStorage.setItem("shoppingListItems", JSON.stringify(listOfShoppingListItems))
+  redoItemsTakenOutOfShoppingList.splice(redoItemsTakenOutOfShoppingList.length-3,3)
+  totalAmountBeingSpentOnThisShoppingList = 0
+    for(let i = 0; i<listOfShoppingListItems.length; i +=3){
+      totalAmountBeingSpentOnThisShoppingList += Number(listOfShoppingListItems[i+1])
+    }
+  totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
+  if(redoItemsTakenOutOfShoppingList.length <=0){
+    recoverPastItemForShoppingListBtn.style.display = "none"
+  }
+})
 shoppingListItemHolder.addEventListener('click', function(event) {
   console.log(shoppingListItemHolder.children)
   //event.target.classList.toggle("gettingRidOfItem")
   if (event.target.tagName.toLowerCase() === 'div') {
-    //whoosh.play()
+    whoosh.play()
+    recoverPastItemForShoppingListBtn.style.display = "inline"
     doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
     clearListWarningEl.style.display = "none"
     console.log(event.target.children)
     console.log(event.target.children[0].innerHTML);
+    redoItemsTakenOutOfShoppingList.push(listOfShoppingListItems[listOfShoppingListItems.indexOf(event.target.children[0].innerHTML)])
+    redoItemsTakenOutOfShoppingList.push(listOfShoppingListItems[listOfShoppingListItems.indexOf(event.target.children[0].innerHTML)+1])
+    redoItemsTakenOutOfShoppingList.push(listOfShoppingListItems[listOfShoppingListItems.indexOf(event.target.children[0].innerHTML)+2])
+    //make the thing below the first value of i in a for loop htne have it iterate 3 times futher
     listOfShoppingListItems.splice(listOfShoppingListItems.indexOf(event.target.children[0].innerHTML),3)
+    listOfShoppingListItems.length <= 0 ? clearAllForShoppingListButton.style.display = "none":clearAllForShoppingListButton.style.display = "inline";
     localStorage.setItem("shoppingListItems", JSON.stringify(listOfShoppingListItems))
     event.target.classList.toggle("gettingRidOfItem")
     console.log("clicked")
@@ -749,7 +820,8 @@ shoppingListItemHolder.addEventListener('click', function(event) {
      totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
   }
   else if(event.target.tagName.toLowerCase() === 'p'){
-    //whoosh.play()
+    whoosh.play()
+    recoverPastItemForShoppingListBtn.style.display = "inline"
     doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
     clearListWarningEl.style.display = "none"
@@ -757,7 +829,11 @@ shoppingListItemHolder.addEventListener('click', function(event) {
     console.log(event.target.parentNode.children[0].innerHTML);
     totalAmountBeingSpentOnThisShoppingList -= Number(event.target.parentNode.children[1].innerHTML)
      totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
+     redoItemsTakenOutOfShoppingList.push(listOfShoppingListItems[listOfShoppingListItems.indexOf(event.target.parentNode.children[0].innerHTML)])
+     redoItemsTakenOutOfShoppingList.push(listOfShoppingListItems[listOfShoppingListItems.indexOf(event.target.parentNode.children[0].innerHTML)+1])
+     redoItemsTakenOutOfShoppingList.push(listOfShoppingListItems[listOfShoppingListItems.indexOf(event.target.parentNode.children[0].innerHTML)+2])
     listOfShoppingListItems.splice(listOfShoppingListItems.indexOf(event.target.parentNode.children[0].innerHTML),3)
+    listOfShoppingListItems.length <= 0 ? clearAllForShoppingListButton.style.display = "none":clearAllForShoppingListButton.style.display = "inline";
     localStorage.setItem("shoppingListItems", JSON.stringify(listOfShoppingListItems))
     event.target.parentNode.classList.toggle("gettingRidOfItem")
     console.log("clicked")
@@ -808,6 +884,7 @@ shoppingListItemInput.addEventListener("mouseenter", function(){
   
 })
 function onWindowResize(){
+  document.body.style.backgroundSize = "cover"
   let boundingsOfShoppingListItemInput = shoppingListItemInput.getBoundingClientRect();
   pastItemsForShoppingCartCn.style.marginTop = (boundingsOfShoppingListItemInput.top) - pastItemsForShoppingCartCn.offsetHeight + "px";
   console.log(boundingsOfShoppingListItemInput.top - pastItemsForShoppingCartCn.offsetHeight)
