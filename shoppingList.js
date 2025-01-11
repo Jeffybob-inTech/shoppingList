@@ -20,18 +20,6 @@ const recoverPastItemForShoppingListBtn = document.getElementById("recoverPastIt
 //const dataSearchThroughShoppingListInput = document.getElementById("[data-search-for-shopping-list-input")
 const clearPastSearchesBtn = document.getElementById("clearPastSearchesBtn")
 const aVsAnForShoppingListInputsEl = document.getElementById("aVsAnForShoppingListInputsEl")
-const addItemToShoppingListAudio = new Audio("/personalFinanceWebsite/audioFiles/addExpenseNewSoundEffect.wav")
-const whoosh = new Audio("/personalFinanceWebsite/audioFiles/whoosh.wav")
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-var source = audioCtx.createMediaElementSource(whoosh);
-
-// create a gain node
-var gainNode = audioCtx.createGain();
-gainNode.gain.value = 2; // double the volume
-source.connect(gainNode);
-
-// connect the gain node to an output destination
-gainNode.connect(audioCtx.destination);
 let redoItemsTakenOutOfShoppingList = []
 let previousItemsInShoppingList = []
 try{previousItemsInShoppingList = JSON.parse(localStorage.getItem("previousItemsSearched"))}
