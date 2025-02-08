@@ -21,11 +21,13 @@ const recoverPastItemForShoppingListBtn = document.getElementById("recoverPastIt
 const clearPastSearchesBtn = document.getElementById("clearPastSearchesBtn")
 const aVsAnForShoppingListInputsEl = document.getElementById("aVsAnForShoppingListInputsEl")
 let redoItemsTakenOutOfShoppingList = []
-let previousItemsInShoppingList = []
+let previousItemsInShoppingList;
 try{previousItemsInShoppingList = JSON.parse(localStorage.getItem("previousItemsSearched"))}
 catch(error){previousItemsInShoppingList =[]}//all items they have put in their shopping list (for the past 6 shopping lists)
 let prevoiusItemsInShoppingListFilterd = []// = ["Just", "Some just checking", "example spaces", " items","Even ","More","examples","to","show","the","limit","of","this","thingy"];//just don't show items already in this shopping list use .filter filter[i] !== list[x]
-let listOfShoppingListItems = typeof JSON.parse(localStorage.getItem("shoppingListItems")) === 'object'? JSON.parse(localStorage.getItem("shoppingListItems")):[];
+let listOfShoppingListItems;
+try{listOfShoppingListItems = JSON.parse(localStorage.getItem("shoppingListItems"))}
+catch(error){listOfShoppingListItems = []}
 
 if(previousItemsInShoppingList != null){
 for(let i = 0; i<previousItemsInShoppingList.length; i++){
