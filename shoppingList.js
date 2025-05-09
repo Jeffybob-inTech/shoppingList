@@ -283,8 +283,10 @@ shoppingListItemInput.addEventListener("input", function(e){
 //make a double click to confirm doplicates
 addItemBtn.addEventListener("click", function(){
   let itemAlreadyInArray = false;
+  if(listOfShoppingListItems!==null){
   for(let i = 0; i<listOfShoppingListItems.length; i +=3){
     shoppingListItemInput.value === listOfShoppingListItems[i] ? itemAlreadyInArray = true: itemAlreadyInArray;
+  }
   }
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""&& !itemAlreadyInArray){
     addItemToShoppingListAudio.play()
