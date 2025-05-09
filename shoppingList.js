@@ -60,6 +60,7 @@ console.log(prevoiusItemsInShoppingListFilterd)
 console.log(prevoiusItemsInShoppingListFilterd)
 let totalAmountBeingSpentOnThisShoppingList = 0;
 function onLoadShopExsistingItems() {
+if(listOfShoppingListItems.length != null){
   for(let i = 0; i<listOfShoppingListItems.length; i +=3){
     var newListItem = document.createElement("div");
     newListItem.classList.add("shoppingListItem");
@@ -109,6 +110,7 @@ function onLoadShopExsistingItems() {
     clearAllForShoppingListButton.style.display = "block"
   }
   totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
+}
 }
 onLoadShopExsistingItems()
 console.log(JSON.parse(localStorage.getItem("shoppingListItems")))
