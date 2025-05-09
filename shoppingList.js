@@ -112,7 +112,9 @@ if(listOfShoppingListItems.length != null){
   totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
 }
 }
+if(listOfShoppingListItems===null){}else{
 onLoadShopExsistingItems()
+}
 console.log(JSON.parse(localStorage.getItem("shoppingListItems")))
 /*
 shoppingListPriceInput.addEventListener("click", function(){
