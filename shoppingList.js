@@ -29,7 +29,7 @@ let listOfShoppingListItems;
 try{listOfShoppingListItems = JSON.parse(localStorage.getItem("shoppingListItems"))}
 catch(error){listOfShoppingListItems = []}
 
-if(previousItemsInShoppingList !-= null){
+if(previousItemsInShoppingList !== null){
 for(let i = 0; i<previousItemsInShoppingList.length; i++){
   prevoiusItemsInShoppingListFilterd.push(previousItemsInShoppingList[i])
 }
