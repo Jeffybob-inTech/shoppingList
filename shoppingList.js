@@ -29,7 +29,7 @@ let listOfShoppingListItems;
 try{listOfShoppingListItems = JSON.parse(localStorage.getItem("shoppingListItems"))}
 catch(error){listOfShoppingListItems = []}
 
-if(previousItemsInShoppingList != null){
+if(previousItemsInShoppingList !-= null){
 for(let i = 0; i<previousItemsInShoppingList.length; i++){
   prevoiusItemsInShoppingListFilterd.push(previousItemsInShoppingList[i])
 }
@@ -290,6 +290,9 @@ addItemBtn.addEventListener("click", function(){
   }
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""&& !itemAlreadyInArray){
     //addItemToShoppingListAudio.play()
+    if(previousItemsInShoppingList === null){
+        previousItemsInShoppingList = [];
+    }
     previousItemsInShoppingList.push(shoppingListItemInput.value)
     localStorage.setItem("previousItemsSearched",JSON.stringify(previousItemsInShoppingList))
     clearAllForShoppingListButton.style.display = "block"
@@ -298,6 +301,9 @@ addItemBtn.addEventListener("click", function(){
      totalAmountBeingSpentOnThisShoppingList += Number(shoppingListPriceInput.value)
      totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
     //getting the values and setting them to the array
+    if(listOfShoppingListItems === null){
+        listOfShoppingListItems = [];
+    }
     listOfShoppingListItems.push(shoppingListItemInput.value)
     listOfShoppingListItems.push(shoppingListPriceInput.value)
     listOfShoppingListItems.push(categoriesForShoppingListInput.value)
