@@ -289,7 +289,7 @@ addItemBtn.addEventListener("click", function(){
   }
   }
   if(shoppingListItemInput.value != ""&& shoppingListPriceInput.value != ""&& !itemAlreadyInArray){
-    addItemToShoppingListAudio.play()
+    //addItemToShoppingListAudio.play()
     previousItemsInShoppingList.push(shoppingListItemInput.value)
     localStorage.setItem("previousItemsSearched",JSON.stringify(previousItemsInShoppingList))
     clearAllForShoppingListButton.style.display = "block"
@@ -380,7 +380,7 @@ addItemBtn.addEventListener("dblclick", function(){
     //showing previous search thingy
     previousItemsInShoppingList.push(shoppingListItemInput.value)
     localStorage.setItem("previousItemsSearched",JSON.stringify(previousItemsInShoppingList))
-    addItemToShoppingListAudio.play()
+    //addItemToShoppingListAudio.play()
     addItemBtn.style.backgroundColor = "gray"
     clearAllForShoppingListButton.style.display = "block"
     //adding and representing new total
@@ -792,7 +792,7 @@ shoppingListItemHolder.addEventListener('click', function(event) {
   console.log(shoppingListItemHolder.children)
   //event.target.classList.toggle("gettingRidOfItem")
   if (event.target.tagName.toLowerCase() === 'div') {
-    whoosh.play()
+    //whoosh.play()
     recoverPastItemForShoppingListBtn.style.display = "inline"
     doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
@@ -816,7 +816,7 @@ shoppingListItemHolder.addEventListener('click', function(event) {
      totalAmountBeingSpentThisMonthEl.textContent = totalAmountBeingSpentOnThisShoppingList
   }
   else if(event.target.tagName.toLowerCase() === 'p'){
-    whoosh.play()
+    //whoosh.play()
     recoverPastItemForShoppingListBtn.style.display = "inline"
     doubleItemEl.style.display = "none"
     mustInputAnItemEl.style.display = "none"
